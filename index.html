@@ -37,9 +37,13 @@ const qs=[
 let done=[false,false,false,false],started=false;
 
 function startAudio(){
- if(started)return; started=true;
- [a1,a2,a3,a4].forEach(a=>{a.volume=0;a.play().catch(()=>{})});
+ if(started)return; 
+ started=true;
  a1.volume=1;
+ a1.play(); 
+ a2.volume=0;
+ a3.volume=0;
+ a4.volume=0; 
 }
 function fadeIn(a){let v=a.volume;let t=setInterval(()=>{v+=0.05;a.volume=Math.min(v,1);if(v>=1)clearInterval(t)},100)}
 function openQ(i){
@@ -55,9 +59,18 @@ function ans(i,n){
  document.getElementById(qs[i].z).classList.add('done');
  let c=done.filter(Boolean).length;
  s.textContent=c;
- if(c===2)fadeIn(a2);
- if(c===3)fadeIn(a3);
- if(c===4)fadeIn(a4);
+ if(c===2) {
+  a2.play(); 
+fadeIn(a2);
+}
+ if(c===3) {
+  a3.play();
+ fadeIn(a3);
+}
+ if(c===4) {
+  a4.play();
+ fadeIn(a4);
+}
  modal.style.display='none';
  if(c===4){
  modal.style.display='block';
